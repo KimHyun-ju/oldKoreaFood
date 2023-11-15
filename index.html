@@ -2,57 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PDF Viewer</title>
-  <!-- PDF.js library 불러오기 -->
-  <script src="https://mozilla.github.io/pdf.js/build/pdf.mjs" type="module"></script>
+  <title>Korea Old Food</title>
   <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-    }
-    #pdf-viewer {
-      display: block;
-      margin: auto;
+    iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   </style>
 </head>
 <body>
-  <!-- PDF를 표시할 영역 -->
-  <canvas id="pdf-viewer"></canvas>
-
   <script>
-    // PDF.js로 PDF 파일을 불러와 표시하는 함수
-    function loadPDF(url) {
-      // PDF.js의 PDF 파일 로더
-      pdfjsLib.getDocument(url).then(function (pdf) {
-        // 첫 번째 페이지를 불러옴
-        pdf.getPage(1).then(function (page) {
-          // PDF를 표시할 영역 지정
-          var canvas = document.getElementById('pdf-viewer');
-          var context = canvas.getContext('2d');
+    const iframe = document.querySelector("iframe");
+    const showPdf = (pdfUrl) => {
+      var iframe = document.createElement("iframe");
+      iframe.src = pdfUrl;
+      iframe.width = window.innerWidth;
+      iframe.height = window.innerHeight;
 
-          // PDF를 Canvas에 렌더링
-          var viewport = page.getViewport({ scale: 1.5 });
-          canvas.height = viewport.height;
-          canvas.width = viewport.width;
+      document.body.appendChild(iframe);
 
-          var renderContext = {
-            canvasContext: context,
-            viewport: viewport,
-          };
-
-          page.render(renderContext);
-        });
+      window.addEventListener('resize', () => {
+        iframe.width = window.innerWidth;
+        iframe.height = window.innerHeight;
       });
-    }
+    };
 
-    // PDF 파일의 URL 지정
-    var pdfUrl = "oldkoreafood.pdf";
-
-
-    // PDF 파일 로드 함수 호출
-    loadPDF(pdfUrl);
+    showPdf("oldkoreafood.pdf");
   </script>
 </body>
 </html>
