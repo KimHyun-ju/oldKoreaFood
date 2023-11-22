@@ -20,6 +20,8 @@
       iframe.src = pdfUrl;
       iframe.type = "application/pdf";
       iframe.style.display = "none";
+      iframe.width = window.innerWidth;
+      iframe.height = window.innerHeight;
 
       document.body.appendChild(iframe);
 
