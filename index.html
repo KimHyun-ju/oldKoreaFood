@@ -34,6 +34,22 @@
         iframe.style.display = "block";
         iframe.contentDocument.execCommand("enableObjectControls", false, null);
       };
+
+      // 인앱 브라우저 호환 문제 해결
+      var useragt = navigator.userAgent.toLowerCase();
+      if (useragt.match(/kakaotalk/i) || useragt.match(/line/i)) {
+        // 카카오톡, 라인은 외부 브라우저 호출
+        location.href = 'kakaotalk://web/openExternal?url=' + encodeURIComponent(pdfUrl);
+      } else if (useragt.match(/android/i)) {
+        // 안드로이드 인앱 브라우저는 외부 브라우저 호출
+        location.href = 'intent://' + pdfUrl.replace(/https?:\/\//i, '') + '#Intent;scheme=http;package=com.android.chrome;end';
+      } else {
+        // 그 외 인앱 브라우저는 iframe으로 표시
+        iframe.src = pdfUrl;
+        iframe.style.display = "block";
+        iframe.contentDocument.execCommand("enableObjectControls", false, null);
+
+      }
     };
 
     showPdf("oldkoreafood.pdf");
