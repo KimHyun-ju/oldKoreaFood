@@ -18,8 +18,8 @@
     const showPdf = (pdfUrl) => {
       var iframe = document.createElement("iframe");
       iframe.src = pdfUrl;
-      iframe.width = window.innerWidth;
-      iframe.height = window.innerHeight;
+      iframe.type = "application/pdf";
+      iframe.style.display = "none";
 
       document.body.appendChild(iframe);
 
@@ -27,6 +27,10 @@
         iframe.width = window.innerWidth;
         iframe.height = window.innerHeight;
       });
+
+      iframe.onload = () => {
+        iframe.style.display = "block";
+      };
     };
 
     showPdf("oldkoreafood.pdf");
