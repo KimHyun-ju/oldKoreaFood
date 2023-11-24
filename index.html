@@ -13,23 +13,6 @@
   </style>
 </head>
 <body>
-  <script>
-    const iframe = document.querySelector("iframe");
-    const showPdf = (pdfUrl) => {
-      var iframe = document.createElement("iframe");
-      iframe.src = pdfUrl;
-      iframe.width = window.innerWidth;
-      iframe.height = window.innerHeight;
-
-      document.body.appendChild(iframe);
-
-      window.addEventListener('resize', () => {
-        iframe.width = window.innerWidth;
-        iframe.height = window.innerHeight;
-      });
-    };
-
-    showPdf("oldkoreafood.pdf");
-  </script>
+  <a href="oldkoreafood.pdf" target="_blank">Open PDF in New Tab</a>
 </body>
 </html>
