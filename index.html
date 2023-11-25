@@ -1,17 +1,35 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>PDF Viewer</title>
-  <script src="//mozilla.github.io/pdf.js/build/pdf.js"></script>
+  <title>Korea Old Food-고조리서활용음식(古調理書活用飮食)</title>
+  <style>
+    iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
 </head>
 <body>
   <script>
-    const pdfViewer = new PDFViewer();
+    const iframe = document.querySelector("iframe");
+    const showPdf = (pdfUrl) => {
+      var iframe = document.createElement("iframe");
+      iframe.src = pdfUrl;
+      iframe.width = window.innerWidth;
+      iframe.height = window.innerHeight;
 
-    pdfViewer.open("oldkoreafood.pdf");
+      document.body.appendChild(iframe);
 
-    document.body.appendChild(pdfViewer.container);
+      window.addEventListener('resize', () => {
+        iframe.width = window.innerWidth;
+        iframe.height = window.innerHeight;
+      });
+    };
+
+    showPdf("/web/viewer.html?file=oldkoreafood.pdf");
   </script>
 </body>
 </html>
